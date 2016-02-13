@@ -2,12 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCollect</title>
+    
+    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
   </head>
   <body>
-    <div id="main"></div>
+    <header class="header">
+      <div class="container">
+        <!-- Left side -->
+        <div class="header-left">
+          <a class="header-item" href="#">
+            OpenCollect
+          </a>
+          <a class="header-tab" href="#">Home</a>
+          <a class="header-tab" href="#add">Add</a>
+        </div>
+      </div>
+    </header>
+    <section class="section">
+      <div id="main" class="container"></div>
+    </section>
     
+    <script src="//cdn.jsdelivr.net/pouchdb/5.2.1/pouchdb.min.js"></script>
     <script src="./dist/bundle.js"></script>
   </body>
 </html>
