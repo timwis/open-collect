@@ -1,0 +1,21 @@
+/* Workaround for https://github.com/jgthms/bulma/issues/72 */
+#map img { max-height: inherit; }
+
+.crosshairs:before, .crosshairs:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+.crosshairs:before {
+  bottom: 50%;
+  border-bottom: 1px #777 solid;
+}
+.crosshairs:after {
+  right: 50%;
+  border-right: 1px #777 solid;
+}

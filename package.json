@@ -45,6 +45,7 @@
     "ampersand-view-switcher": "^2.1.0",
     "bulma": "0.0.12",
     "font-awesome": "^4.5.0",
+    "leaflet": "^0.7.7",
     "localforage": "^1.4.0"
   }
 }
