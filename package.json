@@ -1,8 +1,8 @@
 {
-  "name": "es6-boilerplate",
+  "name": "open-collect",
   "version": "1.0.0",
-  "description": "Front-end project boilerplate with es6 build tools. Includes babel, webpack, and npm scripts.",
-  "main": "index.js",
+  "description": "",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --progress --colors",
@@ -11,19 +11,36 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/timwis/es6-boilerplate.git"
+    "url": "git+https://github.com/timwis/open-collect.git"
   },
   "author": "timwis <tim@timwis.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/timwis/es6-boilerplate/issues"
+    "url": "https://github.com/timwis/open-collect/issues"
   },
-  "homepage": "https://github.com/timwis/es6-boilerplate#readme",
+  "homepage": "https://github.com/timwis/open-collect#readme",
   "devDependencies": {
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.5.0",
+    "html-loader": "^0.4.0",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {
+    "ampersand-form-view": "^5.2.1",
+    "ampersand-input-view": "^5.1.0",
+    "ampersand-model": "^6.0.2",
+    "ampersand-pouch-collection": "github:timwis/ampersand-pouch-collection",
+    "ampersand-pouch-model": "github:stefanisak/ampersand-pouch-model",
+    "ampersand-pouch-sync": "github:stefanisak/ampersand-pouch-sync",
+    "ampersand-rest-collection": "^5.0.0",
+    "ampersand-router": "^3.0.2",
+    "ampersand-select-view": "github:timwis/ampersand-select-view",
+    "ampersand-view": "^9.0.2",
+    "ampersand-view-switcher": "^2.1.0",
+    "bulma": "0.0.12",
+    "font-awesome": "^4.5.0",
+    "localforage": "^1.4.0"
   }
 }
