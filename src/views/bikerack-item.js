@@ -7,6 +7,12 @@ export default View.extend({
   bindings: {
     'model.address': '[data-hook~=address]',
     'model.capacity': '[data-hook~=capacity]',
-    'model.condition': '[data-hook~=condition]'
+    'model.condition': '[data-hook~=condition]',
+    'model._id': {
+      hook: 'address',
+      type: function (el, value, previousValue) {
+        el.setAttribute('href', `#/view/${value}`)
+      }
+    }
   }
 })

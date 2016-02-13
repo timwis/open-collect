@@ -1,33 +1,43 @@
 import Router from 'ampersand-router'
 import ViewSwitcher from 'ampersand-view-switcher'
 
-import BikeRackModel from './models/bikerack'
 import BikeRackCollection from './collections/bikeracks'
 import BikeRackListView from './views/bikerack-list'
 import BikeRackFormView from './views/bikerack-form'
+import BikeRackItemView from './views/bikerack-item'
 
 const AppRouter = Router.extend({
   routes: {
     '': 'list',
-    'add': 'add'
+    'add': 'add',
+    'view/:item': 'view'
   },
   initialize: function (opts) {
     opts || (opts = {})
     this.pageSwitcher = opts.pageSwitcher
     this.collection = new BikeRackCollection()
-    this.collection.fetch({
-      success: function () { console.log('fetched', arguments) }
-    })
+    this.collection.fetch()
   },
   list: function () {
-    // this.collection.create({address: '1234 Market St', capacity: 5, condition: 'Good'})
     const view = new BikeRackListView({collection: this.collection})
     this.pageSwitcher.set(view)
   },
   add: function () {
-    const model = new BikeRackModel(null, {collection: this.collection})
-    const view = new BikeRackFormView({model: model})
+    const view = new BikeRackFormView()
+    view.on('submit', (formData) => {
+      view.setLoading(true)
+      this.collection.create(formData, {
+        success: (model) => this.redirectTo(`view/${model._id}`)
+      })
+    })
     this.pageSwitcher.set(view)
+  },
+  view: function (item) {
+    this.collection.getOrFetch(item, (err, model) => {
+      if (err) console.error(err)
+      const view = new BikeRackItemView({model: model})
+      this.pageSwitcher.set(view)
+    })
   }
 })
 

@@ -36,8 +36,9 @@ export default FormView.extend({
       new SubmitView()
     ]
   },
-  submitCallback: function (formData) {
-    this.model.save(formData)
-    console.log(this.model.collection.toJSON())
+  setLoading: function (enabled) {
+    const classList = this.query('[type=submit]').classList
+    const loadingClass = 'is-loading'
+    enabled ? classList.add(loadingClass) : classList.remove(loadingClass)
   }
 })

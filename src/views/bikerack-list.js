@@ -1,6 +1,6 @@
 import View from 'ampersand-view'
 
-import BikeRackItemView from './bikerack-item'
+import BikeRackListItemView from './bikerack-list-item'
 import Template from '../templates/bikerack-list.html'
 
 export default View.extend({
@@ -9,7 +9,7 @@ export default View.extend({
     this.renderWithTemplate(this)
 
     const collectionContainer = this.queryByHook('items')
-    this.renderCollection(this.collection, BikeRackItemView, collectionContainer, opts)
+    this.renderCollection(this.collection, BikeRackListItemView, collectionContainer, opts)
 
     return this
   }
