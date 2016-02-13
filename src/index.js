@@ -9,8 +9,9 @@ import BikeRackItemView from './views/bikerack-item'
 const AppRouter = Router.extend({
   routes: {
     '': 'list',
-    'add': 'add',
-    'view/:item': 'view'
+    'view/:item': 'view',
+    'edit/:item': 'edit',
+    'add': 'add'
   },
   initialize: function (opts) {
     opts || (opts = {})
@@ -22,6 +23,32 @@ const AppRouter = Router.extend({
     const view = new BikeRackListView({collection: this.collection})
     this.pageSwitcher.set(view)
   },
+  view: function (item) {
+    this.collection.getOrFetch(item, (err, model) => {
+      if (err) console.error(err)
+      const view = new BikeRackItemView({model: model})
+      view.on('clickDelete', (deletedModel) => {
+        this.collection.remove(deletedModel)
+        deletedModel.destroy()
+        this.redirectTo('')
+      })
+      this.pageSwitcher.set(view)
+    })
+  },
+  edit: function (item) {
+    this.collection.getOrFetch(item, (err, model) => {
+      if (err) console.error(err)
+      const view = new BikeRackFormView({model: model})
+      view.on('submit', (formData) => {
+        view.setLoading(true)
+        model.save(formData, {
+          success: (model) => this.redirectTo(`view/${model._id}`),
+          error: () => console.error(arguments)
+        })
+      })
+      this.pageSwitcher.set(view)
+    })
+  },
   add: function () {
     const view = new BikeRackFormView()
     view.on('submit', (formData) => {
@@ -31,13 +58,6 @@ const AppRouter = Router.extend({
       })
     })
     this.pageSwitcher.set(view)
-  },
-  view: function (item) {
-    this.collection.getOrFetch(item, (err, model) => {
-      if (err) console.error(err)
-      const view = new BikeRackItemView({model: model})
-      this.pageSwitcher.set(view)
-    })
   }
 })
 
