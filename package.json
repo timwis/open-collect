@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --progress --colors",
     "watch": "webpack -w",
     "build": "webpack -p",
-    "styles": "cleancss -o ./dist/vendor.min.css ./node_modules/bulma/css/bulma.min.css ./node_modules/font-awesome/css/font-awesome.min.css", 
+    "styles": "cleancss -o ./dist/vendor.min.css ./styles/vendor.css",
     "deploy": "npm run build && npm run styles && surge ."
   },
   "repository": {
