@@ -9,7 +9,7 @@
     "watch": "webpack -w",
     "build": "webpack -p",
     "styles": "cleancss -o ./dist/vendor.min.css ./node_modules/bulma/css/bulma.min.css ./node_modules/font-awesome/css/font-awesome.min.css", 
-    "deploy": "npm run build && npm run styles && surge"
+    "deploy": "npm run build && npm run styles && surge ."
   },
   "repository": {
     "type": "git",
