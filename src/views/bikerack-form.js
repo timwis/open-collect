@@ -1,7 +1,10 @@
 import FormView from 'ampersand-form-view'
-import {InputView, SelectView, SubmitView} from './form-elements'
+
+import {InputView, SelectView} from './form-elements'
+import Template from '../templates/bikerack-form.html'
 
 export default FormView.extend({
+  template: Template,
   fields: function () {
     return [
       new InputView({
@@ -32,8 +35,7 @@ export default FormView.extend({
         ],
         required: false,
         parent: this
-      }),
-      new SubmitView()
+      })
     ]
   },
   setLoading: function (enabled) {

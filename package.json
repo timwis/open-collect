@@ -32,7 +32,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "ampersand-form-view": "^5.2.1",
+    "ampersand-form-view": "github:timwis/ampersand-form-view",
     "ampersand-input-view": "^5.1.0",
     "ampersand-model": "^6.0.2",
     "ampersand-pouch-collection": "github:timwis/ampersand-pouch-collection",
