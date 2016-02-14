@@ -28,7 +28,7 @@ export default View.extend({
       maxZoom: 16
     }).addTo(map)
 
-    map.locate({setView: true, maxZoom: 16})
+    map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true})
 
     map.on('locationfound', (e) => {
       this.createLocationIndicator(e).addTo(map)
