@@ -10,7 +10,8 @@ export default PouchModel.extend({
     condition: {
       type: 'string',
       values: ['Poor', 'Good', 'Great']
-    }
+    },
+    geometry: 'object'
   },
   pouch: {
     dbName: 'bikeracks'

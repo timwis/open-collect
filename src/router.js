@@ -1,5 +1,6 @@
 import Router from 'ampersand-router'
 
+import BikeRackModel from './models/bikerack'
 import BikeRackCollection from './collections/bikeracks'
 import BikeRackListView from './views/bikerack-list'
 import BikeRackFormView from './views/bikerack-form'
@@ -51,18 +52,27 @@ export default Router.extend({
     })
   },
   add: function () {
-    const view = new BikeRackFormView()
-    view.on('submit', (formData) => {
-      view.setLoading(true)
-      this.collection.create(formData, {
+    const model = new BikeRackModel()
+
+    const formView = new BikeRackFormView({model: model})
+    formView.on('submit', (formData) => {
+      formView.setLoading(true)
+      model.set(formData)
+      this.collection.create(model, {
         success: (model) => this.redirectTo(`view/${model._id}`),
         error: console.error
       })
     })
-    this.pageSwitcher.set(view)
+
+    const mapView = new MapView()
+    mapView.on('moved', (center) => model.geometry = center)
+    mapView.on('close', () => this.pageSwitcher.set(formView))
+
+    this.pageSwitcher.set(mapView)
   },
   map: function () {
     const view = new MapView()
+    view.on('moved', (center) => console.log(center))
     this.pageSwitcher.set(view)
   }
 })

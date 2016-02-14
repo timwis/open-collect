@@ -22,11 +22,19 @@ export default View.extend({
     return this
   },
   initMap: function (container) {
-    const map = L.map(container).setView(initialLocation, initialZoom)
+    const map = L.map(container)
+
     L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
       maxZoom: 16
     }).addTo(map)
+
+    map.on('moveend', () => {
+      const centerGeojson = this.latlngToGeoJSON(map.getCenter())
+      this.trigger('moved', centerGeojson)
+    }, this)
+
+    map.setView(initialLocation, initialZoom)
 
     map.locate({setView: true, maxZoom: 16, enableHighAccuracy: true})
 
@@ -34,6 +42,8 @@ export default View.extend({
       this.createLocationIndicator(e).addTo(map)
       this.saveLocation(e.latlng)
     })
+
+    map.on('dblclick', () => this.trigger('close'), this)
   },
   createLocationIndicator: function (e) {
     const radius = e.accuracy / 2
@@ -41,5 +51,8 @@ export default View.extend({
   },
   saveLocation: function (latlng) {
     if (storageAvailable) window.localStorage.setItem('lastLocation', JSON.stringify(latlng))
+  },
+  latlngToGeoJSON: function (latlng) {
+    return {type: 'Point', coordinates: [latlng.lng, latlng.lat]}
   }
 })

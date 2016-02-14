@@ -13,7 +13,13 @@ export default View.extend({
     'model._id': [
       { hook: 'address', type: setHref('#/view/') },
       { hook: 'edit-link', type: setHref('#/edit/') }
-    ]
+    ],
+    'model.geometry': {
+      hook: 'geometry',
+      type: function (el, value, previousValue) {
+        if (value && value.coordinates) el.innerText = JSON.stringify(value.coordinates)
+      }
+    }
   },
   events: {
     'click [data-hook~=delete-link]': 'onClickDelete'
