@@ -1,4 +1,3 @@
-import AmpersandView from 'ampersand-view'
 import AmpersandInputView from 'ampersand-input-view'
 import AmpersandSelectView from 'ampersand-select-view'
 

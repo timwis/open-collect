@@ -5,7 +5,7 @@ export default PouchModel.extend({
   props: {
     _id: 'string',
     _rev: 'string',
-    address: 'string',
+    name: 'string',
     capacity: 'number',
     condition: {
       type: 'string',

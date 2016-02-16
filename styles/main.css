@@ -1,5 +1,5 @@
 /* Workaround for https://github.com/jgthms/bulma/issues/72 */
-#map img { max-height: inherit; }
+.map img { max-height: inherit; }
 
 .crosshairs:before, .crosshairs:after {
   content: '';
@@ -18,4 +18,34 @@
 .crosshairs:after {
   right: 50%;
   border-right: 1px #777 solid;
+}
+
+#save-button {
+  width: 60px;
+  height: 30px;
+  font-size: 12pt;
+}
+
+fieldset {
+  margin-bottom: 15px;
+}
+
+.map {
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+}
+.map-thumbnail .map {
+  pointer-events: none;
+}
+.control .map-thumbnail {
+  height: 125px;
+  position: relative;
+  background-color: #d4d4d4;
+}
+.control .map-thumbnail:empty:after {
+  content: '+';
+  font-size: 550%;
+  position: absolute;
+  top: 0; bottom: 0; left: 0; right: 0;
+  text-align: center;
 }

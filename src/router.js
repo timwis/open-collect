@@ -53,8 +53,19 @@ export default Router.extend({
   },
   add: function () {
     const model = new BikeRackModel()
+    this.showFormView(model)
+  },
+  showMapView: function (model) {
+    const mapView = new MapView({model: model})
+    this.pageSwitcher.set(mapView)
 
+    mapView.on('moved', (center) => model.geometry = center)
+    mapView.on('close', () => this.showFormView(model))
+  },
+  showFormView: function (model) {
     const formView = new BikeRackFormView({model: model})
+    this.pageSwitcher.set(formView)
+
     formView.on('submit', (formData) => {
       formView.setLoading(true)
       model.set(formData)
@@ -64,15 +75,9 @@ export default Router.extend({
       })
     })
 
-    const mapView = new MapView()
-    mapView.on('moved', (center) => model.geometry = center)
-    mapView.on('close', () => this.pageSwitcher.set(formView))
-
-    this.pageSwitcher.set(mapView)
-  },
-  map: function () {
-    const view = new MapView()
-    view.on('moved', (center) => console.log(center))
-    this.pageSwitcher.set(view)
+    formView.on('clickThumbnail', () => {
+      model.set(formView.data)
+      this.showMapView(model)
+    })
   }
 })

@@ -11,5 +11,10 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /\.html$/, loader: 'html-loader' }
     ]
+  },
+  resolve: {
+    alias: {
+      'Leaflet.vector-markers': 'Leaflet.vector-markers/dist/Leaflet.vector-markers'
+    }
   }
 }
