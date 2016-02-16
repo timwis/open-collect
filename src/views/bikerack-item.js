@@ -11,10 +11,10 @@ export default View.extend({
     'model.name': '[data-hook~=name]',
     'model.capacity': '[data-hook~=capacity]',
     'model.condition': '[data-hook~=condition]',
-    'model._id': [
-      { hook: 'name', type: setHref('#/view/') },
-      { hook: 'edit-link', type: setHref('#/edit/') }
-    ],
+    'model._id': {
+      hook: 'name',
+      type: setHref('#/view/')
+    },
     'model.geometry': {
       hook: 'geometry',
       type: function (el, value, previousValue) {
@@ -23,8 +23,13 @@ export default View.extend({
     }
   },
   events: {
+    'click [data-hook~=edit-link]': 'onClickEdit',
     'click [data-hook~=delete-link]': 'onClickDelete',
     'click [data-hook~=thumbnail]': 'onClickThumbnail'
+  },
+  onClickEdit: function (e) {
+    this.trigger('clickEdit', this.model)
+    e.preventDefault()
   },
   onClickDelete: function (e) {
     this.trigger('clickDelete', this.model)

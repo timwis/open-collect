@@ -11,7 +11,6 @@ export default Router.extend({
   routes: {
     '': 'list',
     'view/:item': 'view',
-    'edit/:item': 'edit',
     'add': 'add',
     'map': 'map'
   },
@@ -28,32 +27,24 @@ export default Router.extend({
   view: function (item) {
     this.collection.getOrFetch(item, (err, model) => {
       if (err) console.error(err)
-      const view = new BikeRackItemView({model: model})
-      view.on('clickDelete', (deletedModel) => {
-        this.collection.remove(deletedModel)
-        deletedModel.destroy()
-        this.redirectTo('')
-      })
-      this.pageSwitcher.set(view)
-    })
-  },
-  edit: function (item) {
-    this.collection.getOrFetch(item, (err, model) => {
-      if (err) console.error(err)
-      const view = new BikeRackFormView({model: model})
-      view.on('submit', (formData) => {
-        view.setLoading(true)
-        model.save(formData, {
-          success: (model) => this.redirectTo(`view/${model._id}`),
-          error: console.error
-        })
-      })
-      this.pageSwitcher.set(view)
+      this.showItemView(model)
     })
   },
   add: function () {
     const model = new BikeRackModel()
     this.showFormView(model)
+  },
+  showItemView: function (model) {
+    const itemView = new BikeRackItemView({model: model})
+    this.pageSwitcher.set(itemView)
+
+    itemView.on('clickEdit', () => this.showFormView(model))
+
+    itemView.on('clickDelete', (deletedModel) => {
+      this.collection.remove(deletedModel)
+      deletedModel.destroy()
+      this.redirectTo('')
+    })
   },
   showMapView: function (model) {
     const mapView = new MapView({model: model})
@@ -68,9 +59,10 @@ export default Router.extend({
 
     formView.on('submit', (formData) => {
       formView.setLoading(true)
-      model.set(formData)
-      this.collection.create(model, {
-        success: (model) => this.redirectTo(`view/${model._id}`),
+      if (!model.collection) this.collection.add(model)
+      model.save(formData, {
+        // success: (model) => this.redirectTo(`view/${model._id}`),
+        success: (model) => this.showItemView(model),
         error: console.error
       })
     })
