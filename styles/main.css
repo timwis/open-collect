@@ -1,0 +1,10 @@
+@import url('../node_modules/bulma/css/bulma.css');
+@import url('../node_modules/leaflet/dist/leaflet.css');
+
+html, body, main {
+  height: 100%;
+}
+
+main {
+  position: relative;
+}

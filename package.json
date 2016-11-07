@@ -1,0 +1,34 @@
+{
+  "name": "open-collect",
+  "version": "2.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "budo src/index.js --live --pushstate --css styles/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timwis/open-collect.git"
+  },
+  "keywords": [],
+  "author": "timwis <tim@timwis.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timwis/open-collect/issues"
+  },
+  "homepage": "https://github.com/timwis/open-collect#readme",
+  "dependencies": {
+    "bulma": "^0.2.3",
+    "cache-element": "^1.1.1",
+    "choo": "^3.3.0",
+    "choo-log": "^2.0.1",
+    "get-form-data": "^1.2.5",
+    "leaflet": "^1.0.1",
+    "lodash": "^4.16.6",
+    "ramda": "^0.22.1",
+    "typestyle": "^0.6.3"
+  },
+  "devDependencies": {
+    "budo": "^9.2.1"
+  }
+}
