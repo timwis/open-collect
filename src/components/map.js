@@ -3,18 +3,6 @@ const widget = require('cache-element/widget')
 const L = require('leaflet')
 const style = require('typestyle').style
 
-const mapContainerClass = style({
-  position: 'relative',
-  height: '100%'
-})
-
-const mapClass = style({
-  position: 'absolute !important',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0
-})
 
 module.exports = widget((handleUpdates) => {
   let map
@@ -31,19 +19,17 @@ module.exports = widget((handleUpdates) => {
 
   return html`
     <div class=${mapContainerClass}>
-      <div id="map" class=${mapClass} onload=${onload} onunload=${onunload}></div>
+      <div id="map" class="${mapClass} ${crosshairsClass}" onload=${onload} onunload=${onunload}></div>
     </div>
   `
 
   function onload (el) {
     map = L.map(el).setView(currentCoords, defaultZoom)
 
-    L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.{ext}', {
-      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
       subdomains: 'abcd',
-      minZoom: 0,
-      maxZoom: 20,
-      ext: 'png'
+      maxZoom: 19
     }).addTo(map)
   }
 
@@ -58,3 +44,37 @@ module.exports = widget((handleUpdates) => {
 function coordsMatch (a, b) {
   return a[0] === b[0] && a[1] === b[1]
 }
+
+const mapContainerClass = style({
+  position: 'relative',
+  height: '100%'
+})
+
+const mapClass = style({
+  position: 'absolute !important',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0
+})
+
+const crosshairsClass = style({
+  '&:before, &:after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    pointerEvents: 'none',
+    zIndex: 999
+  },
+  '&:before': {
+    bottom: '50%',
+    borderBottom: '1px #777 solid'
+  },
+  '&:after': {
+    right: '50%',
+    borderRight: '1px #777 solid'
+  }
+})
