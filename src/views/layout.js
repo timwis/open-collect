@@ -2,7 +2,7 @@ const html = require('choo/html')
 
 module.exports = (View) => (state, prev, send) => {
   return html`
-    <main>
+    <main onload=${onload}>
       <nav class="nav has-shadow">
         <div class="container">
           <a href="#/" class="nav-item is-tab">Home</a>
@@ -12,4 +12,7 @@ module.exports = (View) => (state, prev, send) => {
       ${View(state, prev, send)}
     </main>
   `
+  function onload () {
+    send('fetch')
+  }
 }

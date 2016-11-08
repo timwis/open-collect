@@ -33,7 +33,7 @@ module.exports = (state, prev, send) => {
   `
   function onsubmit (evt) {
     const formData = getFormData(evt.target)
-    send('add', formData)
+    send('create', formData)
     evt.target.reset()
     evt.preventDefault()
   }
